@@ -124,3 +124,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # For collectstatic on deployment
 STATIC_ROOT = BASE_DIR / 'static'
+
+# Redirect to homepage after successful login
+LOGIN_REDIRECT_URL = "/"
