@@ -9,11 +9,27 @@
     </head>
     <body>
         <header class="page-header">
-          <div class="container">
-              <h1><a href="/">Django Girls Blog</a></h1>
-          </div>
+            <div class="container">
+                {% if user.is_authenticated %}
+                <a href="{% url 'post_new' %}" class="top-menu">
+                    {% include './icons/file-earmark-plus.svg' %}
+                </a>
+                <a href="{% url 'post_draft_list' %}" class="top-menu">{% include './icons/pencil-square.svg' %}</a>
+                <p id="logout" class="top-menu">Hello {{ user.username }}
+                    <small>
+                        <form action="{% url 'logout' %}" method="post" class="logout-form">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-button">(Log out)</button>
+                        </form>
+                    </small>
+                </p>
+                {% else %}
+                <a href="{% url 'login' %}" class="top-menu">{% include './icons/lock-fill.svg' %}</a>
+                {% endif %}
+                <h1><a href="/">Django Girls Blog</a></h1>
+            </div>
         </header>
-        <main class="container">
+        <main class="content container">
             <div class="row">
                 <div class="col">
                 {% block content %}
